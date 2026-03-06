@@ -67,6 +67,25 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .ins-btn.on{background:var(--blue-lt);color:var(--blue);}
 .ins-btn svg{pointer-events:none;}
 
+/* OCR 버튼 */
+.ocr-ins-btn{
+  width:auto !important;padding:0 10px;
+  color:var(--orange) !important;
+  border:1.5px solid var(--orange) !important;
+  background:#FFF6EF !important;
+  border-radius:7px;position:relative;
+  white-space:nowrap;
+}
+.ocr-ins-btn:hover{background:var(--orange) !important;color:white !important;transform:translateY(-1px);box-shadow:0 3px 10px rgba(255,140,66,.35);}
+.ocr-ins-btn:hover .ocr-new-tag{background:white;color:var(--orange);}
+.ocr-new-tag{
+  font-size:8px;font-weight:800;
+  padding:1px 5px;border-radius:8px;
+  background:var(--orange);color:white;
+  margin-left:3px;pointer-events:none;
+  vertical-align:middle;
+}
+
 /* 핵심 CTA 버튼들 */
 .cta-group{display:flex;align-items:center;gap:8px;padding-left:10px;margin-left:auto;}
 .btn-add-c{
@@ -352,6 +371,64 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .sbi{font-size:10px;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:4px;}
 .sdot{width:5px;height:5px;border-radius:50%;background:var(--green);}
 
+/* ── 템플릿 선택 모달 ── */
+.tmpl-overlay{position:fixed;inset:0;background:rgba(10,15,40,.45);backdrop-filter:blur(4px);z-index:900;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
+.tmpl-overlay.open{opacity:1;pointer-events:all;}
+.tmpl-modal{background:white;border-radius:16px;width:780px;max-height:86vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.28);transform:translateY(12px) scale(.97);transition:transform .3s cubic-bezier(.34,1.56,.64,1);overflow:hidden;}
+.tmpl-overlay.open .tmpl-modal{transform:none;}
+
+.tmpl-header{padding:22px 28px 18px;border-bottom:1px solid var(--g2);display:flex;align-items:baseline;gap:12px;flex-shrink:0;}
+.tmpl-header h3{font-size:16px;font-weight:800;color:var(--text);}
+.tmpl-header p{font-size:13px;color:var(--g4);}
+.tmpl-close{margin-left:auto;width:30px;height:30px;border-radius:50%;background:var(--g1);border:none;cursor:pointer;font-size:16px;color:var(--g4);display:flex;align-items:center;justify-content:center;}
+.tmpl-close:hover{background:var(--g2);color:var(--text);}
+
+.tmpl-body{display:flex;flex:1;overflow:hidden;}
+
+.tmpl-left{flex:1;padding:22px 24px;overflow-y:auto;border-right:1px solid var(--g2);}
+.tmpl-left::-webkit-scrollbar{width:3px;}
+.tmpl-left::-webkit-scrollbar-thumb{background:var(--g3);}
+
+.tmpl-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px;}
+.tmpl-section-lbl{font-size:10px;font-weight:700;color:var(--g4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:5px;}
+.tmpl-section-lbl::after{content:'';flex:1;height:1px;background:var(--g2);}
+
+.tmpl-item{
+  border:2px solid var(--g2);border-radius:10px;padding:0;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;
+  transition:all .18s;background:white;overflow:hidden;
+}
+.tmpl-item:hover{border-color:#b0bfff;background:var(--blue-lt);}
+.tmpl-item.sel{border-color:var(--blue);background:var(--blue-lt);box-shadow:0 0 0 3px rgba(75,110,245,.15);}
+.tmpl-item.ocr-item{border-color:#FFD4B0;}
+.tmpl-item.ocr-item:hover{border-color:var(--orange);background:#FFF6EF;}
+.tmpl-item.ocr-item.sel{border-color:var(--orange);background:#FFF6EF;box-shadow:0 0 0 3px rgba(255,140,66,.15);}
+
+.tmpl-ico{width:100%;height:66px;display:flex;align-items:center;justify-content:center;background:var(--g1);border-bottom:1px solid var(--g2);}
+.tmpl-item.sel .tmpl-ico{background:#dce5ff;border-color:#b0c4ff;}
+.tmpl-item.ocr-item .tmpl-ico{background:#FFF0E3;}
+.tmpl-item.ocr-item.sel .tmpl-ico{background:#FFD4B0;}
+
+.tmpl-lbl{font-size:11px;font-weight:600;color:var(--g5);padding:7px 4px 8px;text-align:center;line-height:1.3;}
+.tmpl-item.sel .tmpl-lbl{color:var(--blue);font-weight:700;}
+.tmpl-item.ocr-item .tmpl-lbl{color:#C05E10;}
+.tmpl-item.ocr-item.sel .tmpl-lbl{color:var(--orange);}
+.tmpl-new{font-size:8px;font-weight:800;background:var(--orange);color:white;padding:1px 5px;border-radius:6px;display:block;margin:-2px auto 4px;}
+
+.tmpl-right{width:220px;flex-shrink:0;padding:22px 18px;background:var(--g1);display:flex;flex-direction:column;gap:10px;}
+.tmpl-preview-title{font-size:10px;font-weight:700;color:var(--g4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px;}
+.tmpl-preview-box{background:white;border-radius:8px;border:1.5px solid var(--g2);min-height:130px;display:flex;align-items:center;justify-content:center;flex:1;flex-direction:column;gap:6px;color:var(--g4);font-size:12px;padding:14px;}
+.tmpl-preview-box.ocr-preview{border-color:#FFD4B0;background:#FFFAF6;}
+.tmpl-preview-name{font-size:13px;font-weight:800;color:var(--text);margin-bottom:2px;}
+.tmpl-preview-desc{font-size:11px;color:var(--g4);line-height:1.6;text-align:center;}
+
+.tmpl-footer{padding:14px 24px;border-top:1px solid var(--g2);display:flex;gap:8px;flex-shrink:0;}
+.tmpl-cancel{height:42px;padding:0 20px;border-radius:8px;border:1.5px solid var(--g2);background:white;color:var(--g5);font-size:13px;font-weight:700;cursor:pointer;font-family:'Noto Sans KR',sans-serif;}
+.tmpl-cancel:hover{background:var(--g1);}
+.tmpl-confirm{flex:1;height:42px;border-radius:8px;border:none;background:var(--blue);color:white;font-size:13px;font-weight:700;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:all .2s;opacity:.4;pointer-events:none;}
+.tmpl-confirm.active{opacity:1;pointer-events:all;background:linear-gradient(135deg,var(--blue),var(--blue-dk));}
+.tmpl-confirm.ocr-active{opacity:1;pointer-events:all;background:linear-gradient(135deg,var(--orange),#e07030) !important;}
+
 /* TOAST */
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(50px);background:rgba(30,35,64,.95);color:white;padding:9px 20px;border-radius:18px;font-size:12px;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:2000;transition:transform .3s cubic-bezier(.34,1.56,.64,1);}
 .toast.show{transform:translateX(-50%) translateY(0);}
@@ -435,7 +512,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 
     <!-- CTA 버튼 -->
     <div class="cta-group">
-      <button class="btn-add-c" onclick="insertBlock('question')">
+
+      <button class="btn-add-c" onclick="openTmplModal()">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
         콘텐츠 추가
       </button>
@@ -514,7 +592,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 
       <!-- 추가 버튼 -->
       <div class="add-area">
-        <button class="btn-add-main" onclick="insertBlock('question')">콘텐츠 추가</button>
+        <button class="btn-add-main" onclick="openTmplModal()">콘텐츠 추가</button>
         <button class="btn-ai-main" onclick="openModal()">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z" fill="white"/></svg>
           AI로 생성
@@ -544,6 +622,140 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
   <div class="sbi"><div class="sdot"></div>자동저장됨</div>
   <div class="sbi" id="sbSel">문제 블록 선택됨</div>
   <div class="sbi">초등 3-1 · 1차시 · 단원 도입</div>
+</div>
+
+<!-- ══ 템플릿 선택 모달 ══ -->
+<div class="tmpl-overlay" id="tmplOverlay" onclick="tmplOvClick(event)">
+  <div class="tmpl-modal">
+
+    <div class="tmpl-header">
+      <h3>템플릿 선택</h3>
+      <p>| 아래 원하는 템플릿을 선택해보세요.</p>
+      <button class="tmpl-close" onclick="closeTmplModal()">✕</button>
+    </div>
+
+    <div class="tmpl-body">
+      <!-- 왼쪽: 템플릿 그리드 -->
+      <div class="tmpl-left">
+
+        <!-- 기본 템플릿 -->
+        <div class="tmpl-section-lbl">기본</div>
+        <div class="tmpl-grid">
+
+          <div class="tmpl-item" onclick="selectTmpl(this,'빈 문서','새 빈 문서를 추가합니다.')">
+            <div class="tmpl-ico">
+              <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="32" height="36" rx="3" stroke="#C8CDD8" stroke-width="2.5"/><path d="M16 16h16M16 22h10" stroke="#C8CDD8" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div class="tmpl-lbl">빈 문서</div>
+          </div>
+
+          <div class="tmpl-item" onclick="selectTmpl(this,'내 자료','저장된 자료를 불러옵니다.')">
+            <div class="tmpl-ico">
+              <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="32" height="36" rx="3" stroke="#8A93A8" stroke-width="2.5"/><path d="M16 16h16M16 22h16M16 28h10" stroke="#8A93A8" stroke-width="2" stroke-linecap="round"/><circle cx="34" cy="36" r="7" fill="#4B6EF5"/><path d="M31 36h6M34 33v6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <div class="tmpl-lbl">내 자료</div>
+          </div>
+
+          <div class="tmpl-item" onclick="selectTmpl(this,'서술형 활동','서술형 문제를 추가합니다.')">
+            <div class="tmpl-ico">
+              <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><rect x="6" y="12" width="36" height="26" rx="3" stroke="#8A93A8" stroke-width="2.5"/><path d="M12 20h24M12 26h18M12 32h20" stroke="#8A93A8" stroke-width="2" stroke-linecap="round"/><path d="M8 18V10h6" stroke="#8A93A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="tmpl-lbl">서술형 활동</div>
+          </div>
+
+          <div class="tmpl-item" onclick="selectTmpl(this,'선택형','선택형(객관식) 문제를 추가합니다.')">
+            <div class="tmpl-ico">
+              <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><circle cx="14" cy="18" r="3" stroke="#8A93A8" stroke-width="2"/><path d="M20 18h14" stroke="#8A93A8" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="27" r="3" fill="#4B6EF5"/><path d="M20 27h14" stroke="#4B6EF5" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="36" r="3" stroke="#8A93A8" stroke-width="2"/><path d="M20 36h14" stroke="#8A93A8" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div class="tmpl-lbl">선택형</div>
+          </div>
+
+          <div class="tmpl-item" onclick="selectTmpl(this,'단답형','단답형 문제를 추가합니다.')">
+            <div class="tmpl-ico">
+              <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="32" height="10" rx="2" stroke="#8A93A8" stroke-width="2"/><rect x="8" y="24" width="32" height="16" rx="2" stroke="#8A93A8" stroke-width="2" stroke-dasharray="3 2"/></svg>
+            </div>
+            <div class="tmpl-lbl">단답형</div>
+          </div>
+
+        </div>
+
+        <!-- 문제 유형 -->
+        <div class="tmpl-section-lbl">문제 유형</div>
+        <div class="tmpl-grid">
+
+          <div class="tmpl-item" onclick="selectTmpl(this,'OX형','OX 선택 문제를 추가합니다.')">
+            <div class="tmpl-ico">
+              <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><circle cx="16" cy="24" r="8" stroke="#8A93A8" stroke-width="2.5"/><path d="M27 18l10 10M37 18L27 28" stroke="#8A93A8" stroke-width="2.5" stroke-linecap="round"/></svg>
+            </div>
+            <div class="tmpl-lbl">OX형</div>
+          </div>
+
+          <div class="tmpl-item" onclick="selectTmpl(this,'T/F형','참/거짓 문제를 추가합니다.')">
+            <div class="tmpl-ico">
+              <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><text x="7" y="32" font-family="serif" font-size="22" font-weight="700" fill="#8A93A8">T/F</text><text x="7" y="32" font-family="serif" font-size="22" font-weight="700" fill="#8A93A8">형</text></svg>
+            </div>
+            <div class="tmpl-lbl">T/F형</div>
+          </div>
+
+          <div class="tmpl-item" onclick="selectTmpl(this,'순서입력형','순서 배열 문제를 추가합니다.')">
+            <div class="tmpl-ico">
+              <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><path d="M12 14h4M12 24h4M12 34h4" stroke="#8A93A8" stroke-width="2" stroke-linecap="round"/><text x="20" y="18" font-family="monospace" font-size="10" fill="#8A93A8">1 —————</text><text x="20" y="28" font-family="monospace" font-size="10" fill="#8A93A8">2 —————</text><text x="20" y="38" font-family="monospace" font-size="10" fill="#8A93A8">3 —————</text></svg>
+            </div>
+            <div class="tmpl-lbl">순서입력형</div>
+          </div>
+
+          <div class="tmpl-item" onclick="selectTmpl(this,'순서조합형','조합 순서 문제를 추가합니다.')">
+            <div class="tmpl-ico">
+              <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><rect x="8" y="10" width="10" height="8" rx="2" stroke="#8A93A8" stroke-width="2"/><rect x="8" y="22" width="10" height="8" rx="2" stroke="#8A93A8" stroke-width="2"/><rect x="8" y="34" width="10" height="8" rx="2" stroke="#8A93A8" stroke-width="2"/><rect x="30" y="10" width="10" height="8" rx="2" stroke="#8A93A8" stroke-width="2"/><rect x="30" y="22" width="10" height="8" rx="2" stroke="#8A93A8" stroke-width="2"/><rect x="30" y="34" width="10" height="8" rx="2" stroke="#8A93A8" stroke-width="2"/><path d="M18 38l4-4 4 4M18 14l4 4 4-4" stroke="#8A93A8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="tmpl-lbl">순서조합형</div>
+          </div>
+
+          <div class="tmpl-item" onclick="selectTmpl(this,'연결형','항목 연결 문제를 추가합니다.')">
+            <div class="tmpl-ico">
+              <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><circle cx="14" cy="16" r="4" stroke="#8A93A8" stroke-width="2"/><circle cx="14" cy="32" r="4" stroke="#8A93A8" stroke-width="2"/><circle cx="34" cy="16" r="4" stroke="#8A93A8" stroke-width="2"/><circle cx="34" cy="24" r="4" stroke="#8A93A8" stroke-width="2"/><circle cx="34" cy="32" r="4" stroke="#8A93A8" stroke-width="2"/><path d="M18 16 Q24 20 30 24M18 32 Q24 28 30 16" stroke="#8A93A8" stroke-width="1.5" stroke-dasharray="3 2"/></svg>
+            </div>
+            <div class="tmpl-lbl">연결형</div>
+          </div>
+
+        </div>
+
+        <!-- 문제 추출 -->
+        <div class="tmpl-section-lbl">문제 추출</div>
+        <div class="tmpl-grid">
+
+          <div class="tmpl-item ocr-item" onclick="selectTmpl(this,'문제추출 (OCR)','시험지 파일을 업로드하면 AI가 문제를 자동으로 인식하고 추출하여 슬라이드에 추가합니다.',true)">
+            <div class="tmpl-ico">
+              <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+                <rect x="6" y="6" width="36" height="36" rx="3" stroke="#FF8C42" stroke-width="2.5"/>
+                <path d="M6 13h5M6 35h5M37 13h5M37 35h5M13 6v5M35 6v5M13 37v5M35 37v5" stroke="#FF8C42" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="24" cy="24" r="7" stroke="#FF8C42" stroke-width="2.2"/>
+                <circle cx="24" cy="24" r="2.5" fill="#FF8C42"/>
+              </svg>
+            </div>
+            <span class="tmpl-new">NEW</span>
+            <div class="tmpl-lbl">문제추출</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 오른쪽: 미리보기 -->
+      <div class="tmpl-right">
+        <div class="tmpl-preview-title">미리보기</div>
+        <div class="tmpl-preview-box" id="tmplPreview">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#C8CDD8" stroke-width="1.5"/><path d="M8 12h8M8 8h8M8 16h5" stroke="#C8CDD8" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <div style="font-size:11px;color:var(--g3);margin-top:4px;">템플릿을 선택하세요</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tmpl-footer">
+      <button class="tmpl-cancel" onclick="closeTmplModal()">취소</button>
+      <button class="tmpl-confirm" id="tmplConfirm" onclick="confirmTmpl()">템플릿 선택</button>
+    </div>
+
+  </div>
 </div>
 
 <!-- ══ AI MODAL — 단일 화면 (4단계 → 1화면) ══ -->
@@ -1131,6 +1343,81 @@ function resetModal(){
 }
 
 function applyR(){closeModal();insertBlock('question');T('✅ AI 콘텐츠 적용 완료');}
+
+// ── 템플릿 선택 모달 ──
+let selectedTmplName = null, selectedTmplIsOcr = false;
+
+function openTmplModal(){
+  selectedTmplName = null;
+  selectedTmplIsOcr = false;
+  document.querySelectorAll('.tmpl-item').forEach(el => el.classList.remove('sel'));
+  document.getElementById('tmplPreview').innerHTML = `
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#C8CDD8" stroke-width="1.5"/><path d="M8 12h8M8 8h8M8 16h5" stroke="#C8CDD8" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <div style="font-size:11px;color:var(--g3);margin-top:4px;">템플릿을 선택하세요</div>`;
+  const btn = document.getElementById('tmplConfirm');
+  btn.classList.remove('active','ocr-active');
+  btn.textContent = '템플릿 선택';
+  document.getElementById('tmplOverlay').classList.add('open');
+}
+
+function closeTmplModal(){
+  document.getElementById('tmplOverlay').classList.remove('open');
+}
+
+function tmplOvClick(e){
+  if(e.target === document.getElementById('tmplOverlay')) closeTmplModal();
+}
+
+function selectTmpl(el, name, desc, isOcr=false){
+  document.querySelectorAll('.tmpl-item').forEach(i => i.classList.remove('sel'));
+  el.classList.add('sel');
+  selectedTmplName = name;
+  selectedTmplIsOcr = isOcr;
+
+  const preview = document.getElementById('tmplPreview');
+  const btn = document.getElementById('tmplConfirm');
+
+  if(isOcr){
+    preview.className = 'tmpl-preview-box ocr-preview';
+    preview.innerHTML = `
+      <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+        <rect x="6" y="6" width="36" height="36" rx="3" stroke="#FF8C42" stroke-width="2.5"/>
+        <path d="M6 13h5M6 35h5M37 13h5M37 35h5M13 6v5M35 6v5M13 37v5M35 37v5" stroke="#FF8C42" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="24" cy="24" r="7" stroke="#FF8C42" stroke-width="2.2"/>
+        <circle cx="24" cy="24" r="2.5" fill="#FF8C42"/>
+      </svg>
+      <div class="tmpl-preview-name" style="color:#C05E10;">문제추출 (OCR)</div>
+      <div class="tmpl-preview-desc">시험지 파일을 업로드하면<br>AI가 문제를 자동 인식하여<br>슬라이드에 추가합니다.</div>
+      <div style="margin-top:8px;font-size:10px;background:#FFE8D0;color:#C05E10;padding:4px 10px;border-radius:8px;">PDF·HWP·이미지 지원</div>`;
+    btn.classList.remove('active');
+    btn.classList.add('ocr-active');
+    btn.textContent = '📄 문제추출 시작';
+  } else {
+    preview.className = 'tmpl-preview-box';
+    preview.innerHTML = `
+      <div class="tmpl-preview-name">${name}</div>
+      <div class="tmpl-preview-desc">${desc}</div>`;
+    btn.classList.remove('ocr-active');
+    btn.classList.add('active');
+    btn.textContent = '템플릿 선택';
+  }
+}
+
+function confirmTmpl(){
+  closeTmplModal();
+  if(selectedTmplIsOcr){
+    openOcrWindow();
+  } else {
+    insertBlock('question');
+    T(`✅ '${selectedTmplName}' 템플릿 추가됨`);
+  }
+}
+
+// ── OCR ──
+function openOcrWindow(){
+  T('📷 시험지 가져오기 창을 열고 있어요...');
+  window.open('https://t2-extractq.vsaidt.com','_blank','width=1100,height=750,noopener');
+}
 
 // ── TOAST ──
 let tt;
